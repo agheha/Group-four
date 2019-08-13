@@ -1,12 +1,13 @@
-package project;
+package manager.vo;
 
-public class Manageruser{
+public class ManagerUser{
 	private String id;
 	private String pass;
 	private String name;
 	private String birth;
 	private String addr;
 	static int userNum;
+	
 	public String getId() {
 		return id;
 	}

@@ -1,12 +1,13 @@
-package project;
+package manager.vo;
 
-public class Managerstore {
-	String storeType;
-	String storeName;
-	String storeMenu;
-	String storeprice;
-	String storeAddr;
-	int storeNum;
+public class ManagerStore {
+	private String storeType;
+	private String storeName;
+	private String storeMenu;
+	private String storeprice;
+	private String storeAddr;
+	private int storeNum;
+	
 	public String getStoreType() {
 		return storeType;
 	}

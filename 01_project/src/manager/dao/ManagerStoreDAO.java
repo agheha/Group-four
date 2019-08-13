@@ -1,25 +1,27 @@
-package project;
+package manager.dao;
 
 import java.util.Arrays;
 
-public class ManagerstoreDAO {
-	public Managerstore[] storeArr = new Managerstore[3];
+import manager.vo.ManagerStore;
+
+public class ManagerStoreDAO {
+	public ManagerStore[] storeArr = new ManagerStore[3];
 	int storePos = 0;
 	int storeNo = 0;
 	
-	public Managerstore[] selectStore() {
+	public ManagerStore[] selectStore() {
 		return Arrays.copyOf(storeArr, storePos);
 	}
-	public Managerstore selectOneStore(int no) {
+	public ManagerStore selectOneStore(int no) {
 		for (int i = 0 ; i < storePos ; i++) {
-			Managerstore store = storeArr[i];
+			ManagerStore store = storeArr[i];
 			if (store.getStoreNum() != no) continue;
 			return store;
 		}
 		return null;
 	}
 	
-	public void insertStore(Managerstore store) {
+	public void insertStore(ManagerStore store) {
 		if (storeArr.length == storePos) {
 			storeArr = Arrays.copyOf(storeArr, storePos += 10);
 		}
@@ -28,9 +30,9 @@ public class ManagerstoreDAO {
 		storeArr[storePos++] = store;
 	}
 	
-	public void UpdateStore(Managerstore store) {
+	public void UpdateStore(ManagerStore store) {
 		for (int i = 0 ; i < storePos ; i++) {
-			Managerstore m = storeArr[i];
+			ManagerStore m = storeArr[i];
 			if (m.getStoreNum() != store.getStoreNum()) continue;
 			m.setStoreType(store.getStoreType());
 			m.setStoreType(store.getStoreName());
@@ -43,7 +45,7 @@ public class ManagerstoreDAO {
 	public int deleteStore(int no) {
 		int cnt = storeArr.length - (no + 1);
 		for (int i = 0 ; i < storePos ; i++) {
-			Managerstore store = storeArr[i];
+			ManagerStore store = storeArr[i];
 			if (store.getStoreNum() != no) continue;
 			System.arraycopy(storeArr, i + 1, storeArr, i, cnt);
 			storeArr[--storePos] = null;
