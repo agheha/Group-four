@@ -11,7 +11,7 @@ public class Store {
 	private int storeGrade;
 	private String review;
 	
-	
+	 
 	
 	
 	
