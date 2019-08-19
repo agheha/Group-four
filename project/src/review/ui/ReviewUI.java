@@ -2,6 +2,7 @@ package review.ui;
 
 import java.util.Scanner;
 
+import reservation.ui.ReservationUI;
 import review.dao.ReviewDAO;
 import session.LoginStatus;
 
@@ -10,9 +11,9 @@ public class ReviewUI {
 	public void service() {
 		while(true) {
 			switch(menu()) {
-			case 1 : new ReviewDAO().selectReview(); break; // 가게 리뷰검색
+			case 1 : new ListReviewUI().service(); break; // 가게 리뷰검색
 			case 2 : new ReviewDAO().insertReview(); break; // 가게 리뷰등록
-			case 3 : break;
+			case 3 : new WriteReviewUI().service(); break;
 			case 4 : LoginStatus.store = null; return;
 			}
 			

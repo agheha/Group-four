@@ -10,3 +10,4 @@ public class LoginStatus {
 	public static Store Login = null; // 스토어 로그인
 	public static Store store = null; 
 }
+LoginStatus.store = store;
