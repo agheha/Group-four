@@ -17,6 +17,7 @@ public class Store {
 	private int stoNowSeat ;          
 	private int bitPosition ;          
 	private int accReservation ;
+	
 	public int getStoNo() {
 		return stoNo;
 	}

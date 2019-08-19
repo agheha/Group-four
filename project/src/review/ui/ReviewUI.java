@@ -8,12 +8,13 @@ import session.LoginStatus;
 
 public class ReviewUI {
 	Scanner sc = new Scanner(System.in);
+	ReviewDAO dao = new ReviewDAO();
 	public void service() {
 		while(true) {
 			switch(menu()) {
-			case 1 : new ListReviewUI().service(); break; // 가게 리뷰검색
-			case 2 : new ReviewDAO().insertReview(); break; // 가게 리뷰등록
-			case 3 : new WriteReviewUI().service(); break;
+			case 1 : new ListReviewUI(dao).service(); break; // 가게 리뷰검색
+			case 2 : new WriteReviewUI(dao).service(); break; // 가게 리뷰등록
+			case 3 : new ReservationUI(dao).service(); break;
 			case 4 : LoginStatus.store = null; return;
 			}
 			
@@ -26,7 +27,7 @@ public class ReviewUI {
 		System.out.println("가게이름 : " + LoginStatus.store.getStoName()); // 상세보기 넘어오기전 스태틱 클래스 변수에 담긴것을 불러 사용한다
 		System.out.println("가게주소 : " + LoginStatus.store.getStoAddr());
 		System.out.println("--------------------------------");
-		System.out.println("1. 리뷰 보기");
+		System.out.println("1. 리뷰 및 평점보기");
 		System.out.println("2. 리뷰 쓰기");
 		System.out.println("3. 예약 하기");
 		System.out.println("4. 이전으로 돌아가기");
