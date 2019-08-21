@@ -16,7 +16,7 @@ public class passUpdateUI extends BaseUI{
 			System.out.println("변경할 비밀번호를 입력하세요. ");
 			String pass = getString("비밀번호 : ");
 			String pass2 = getString("비밀번호확인 : ");
-			if (pass != pass2) {
+			if (!pass.equals(pass2)) {
 				System.out.println("비밀번호가 일치하지 않습니다. ");
 				System.out.println("다시 입력해주세요. ");
 				continue;

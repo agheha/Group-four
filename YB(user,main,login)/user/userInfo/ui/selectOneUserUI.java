@@ -1,6 +1,5 @@
 package user.userInfo.ui;
 
-import login.dao.LoginDAO;
 import session.LoginStatus;
 import user.dao.UserDAO;
 import user.ui.BaseUI;

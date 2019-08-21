@@ -18,8 +18,8 @@ public class UserDAO {
 	public void userJoinDAO(User user) {
 		try {
 			SQLExecutor.update(
-					"insert into user_tb(no, user_id, user_pass, user_name, user_birth)"
-					+ "values( seq_user_no.nextval, ? , ? , ? , ?)  ",
+					"insert into user_tb(user_no, user_id, user_pass, user_name, user_birth)"
+					+ " values( seq_user_no.nextval, ?, ?, ?, ?)  ",
 					user.getUserId(), user.getUserPass(), user.getUserName(), user.getUserBirth()
 					);
 					
