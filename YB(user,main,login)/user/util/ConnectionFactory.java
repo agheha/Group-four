@@ -9,7 +9,7 @@ import java.util.Properties;
 public class ConnectionFactory {
 	public static Connection getConnection() throws Exception {
 		Properties prop = new Properties();
-		prop.load(new FileReader("src/User/util/db.properties"));
+		prop.load(new FileReader("src/user/util/db.properties"));
 		
 		Class.forName(prop.getProperty("driver"));
 		return DriverManager.getConnection(
@@ -20,15 +20,15 @@ public class ConnectionFactory {
 	}
 	
 	public static void close(Connection con, PreparedStatement pstmt) {
+
 		try {
 			pstmt.close();
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 		try {
 			con.close();
 		} catch (Exception e) {
-			
 		}
 	}
 	
