@@ -3,10 +3,15 @@ package user.userInfo.ui;
 import session.LoginStatus;
 import user.dao.UserDAO;
 import user.ui.BaseUI;
+import user.vo.User;
 
 public class passUpdateUI extends BaseUI{
 		
 	private UserDAO dao;
+	
+	public passUpdateUI() {
+		dao = new UserDAO();
+	}
 	
 	public void service() {
 		while(true) {
@@ -22,8 +27,11 @@ public class passUpdateUI extends BaseUI{
 				continue;
 			}
 			
+			User user = LoginStatus.login;
+			user.setUserPass(pass);
+			
 			// 로그인되어있는 유저의 userNo와 변경할 비밀번호 넘김
-			dao.passUpdate(LoginStatus.login.getUserNo(), pass);
+			dao.passUpdate(user);
 			System.out.println("비밀번호 변경이 완료되었습니다.");
 			break;
 		}

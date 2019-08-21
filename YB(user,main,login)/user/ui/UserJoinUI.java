@@ -35,13 +35,13 @@ public class UserJoinUI extends BaseUI{
 				System.out.println("다시 입력해주세요. ");
 				continue;
 			};
-			/*
+			
 			if(dao.idMatching(id)) {
 				System.out.println("입력하신 아이디는 이미 있는 아이디입니다.");
 				System.out.println("다시 입력해주세요. ");
 				continue;
 			}
-			*/
+			
 			//조건 통과 후 아이디 새 객체에 넣기
 			join.setUserId(id);
 			break;
