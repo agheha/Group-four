@@ -1,59 +1,41 @@
 package store.list.ui;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import review.ui.ReviewUI;
 import session.LoginStatus;
+import session.StoreLoginStatus;
+import session.StoreSearchStatus;
+import store.info.ui.StoreInfoUI;
 import store.list.dao.StoreListDAO;
 import ui.BaseUI;
 import vo.Store;
 
 public class PriceListUI extends BaseUI{
 	private StoreListDAO dao;
-	private String result;
-	public PriceListUI(StoreListDAO dao, String result) {
+//	private String result;
+	public PriceListUI(StoreListDAO dao) {
 		this.dao = dao;
-		this.result = result;
+//		this.result = result;
 	}
 	public void service() {
-		Map<Integer, Store> priceList = dao.selectMap(result); 
-		System.out.println("-------------------------------");
-		System.out.println("가격순으로 보기");
-		System.out.println("-------------------------------");
-		System.out.println("번호\t가게이름\t메인메뉴\t가격\t평점");
-		System.out.println("-------------------------------");
-		
-		for (int i = 1 ; i <= priceList.size(); i++) {
-			Store sto = priceList.get(i);
-			System.out.printf("%-3d %-20s %-10s %,-10d원\t",
-					i,
-					sto.getStoName(), 
-					sto.getRstMenu(),
-					sto.getRstPrice());
-			for (int j = 0 ; j < 5  ; j++ ) {
-				String star = "☆";
-				if (j < Math.round(sto.getStoGpa())) {
-					star = "★";
-				}
-				System.out.print(star);
-			}
-			System.out.println();
+		int startPrice = 0;
+		int endPrice = 0;
+		boolean flag = true;
+		// 최소 금액이 최고금액보다 크면 다시 입력
+		while (flag) {
+			startPrice = getInt("☞ 최소금액을 입력해주세요 : ");
+			endPrice = getInt("☞ 최고금액을 입력해주세요  : ");
+			if (startPrice < endPrice) {
+				flag = false;
+			}else System.out.println("최소금액이 최고금액보다 큰값입니다.");
 		}
-		// 가게번호 입력시 상세보기 할 가게의 정보가 저장됨
-		System.out.println("------------------------------------");
-		LoginStatus.store = priceList.get(getInt("가게 번호를 입력해주세요 : "));
-		while (true) {
-			switch (menu()) {
-			case 1 : new ReviewUI().service(); break;
-			case 2 : LoginStatus.store = null; return;
-			case 0 : 
-				System.out.println("프로그램을 종료합니다.");
-				System.exit(0);
-			default : 
-				System.out.println("해당하는 번호를 찾을수 없습니다.");
-				System.out.println("번호를 다시입력해주세요.");
-			}
-		}
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.println("가격별 보기");
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.println("번호\t가게이름\t\t종류\t메인메뉴\t\t가격\t  거리\t 누적예약수");
+		printStroe(new HashMap<Integer, Store>(), dao.priceList(startPrice, endPrice));
 	}
 }
 

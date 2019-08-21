@@ -9,7 +9,7 @@ public class Store {
 	private int rstPrice ;  
 	private String stoType ;             
 	private int bitDistance ;         
-	private int stoGpa ;               
+	private double stoGpa ;               
 	private String stoAddr ;               
 	private String stoHours ;             
 	private String stoPhoneNumber ;      
@@ -66,10 +66,10 @@ public class Store {
 	public void setBitDistance(int bitDistance) {
 		this.bitDistance = bitDistance;
 	}
-	public int getStoGpa() {
+	public double getStoGpa() {
 		return stoGpa;
 	}
-	public void setStoGpa(int stoGpa) {
+	public void setStoGpa(double stoGpa) {
 		this.stoGpa = stoGpa;
 	}
 	public String getStoAddr() {

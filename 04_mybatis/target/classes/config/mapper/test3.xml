@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mlec.dao.TestMapper3">
+	<select id="selectBoardNo" resultType="int">
+		select s_mybatis_Board_no.nextval
+		  from dual
+	</select>
+	<!-- 게시글 -->
+	<insert id = "insertBoard1" parameterType="Board">
+		insert into tb_mybatis_board(
+			no, title, writer, content
+		)
+		values(
+			#{no}, #{title}, #{writer}, #{content} 
+		)
+	</insert>
+	
+	<insert id = "insertBoard2" parameterType="Board">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select s_mybatis_Board_no.nextval
+			  from dual		
+		</selectKey>
+		insert into tb_mybatis_board(
+			no, title, writer, content
+		)
+		values(
+			#{no}, #{title}, #{writer}, #{content} 
+		)
+	</insert>
+	
+	<!-- 게시글에 묶여있는 파일-->
+	<insert id="insertFile" parameterType="FIle">
+		insert into tb_mybatis_file(
+			file_no, no, file_name,	file_size	
+		)
+		values (
+			s_mybatis_file_no.nextval, #{no}, #{fileName}, #{fileSize}		
+		)
+	</insert>
+	
+	<resultMap type="Member" id="memberMap">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="email" property="email" />
+		<result column="join_date" property="joinDate" />
+		<association property="account" column="id" 
+					 select="selectMemberAccountById" />
+	</resultMap>
+	<resultMap type="Account" id="accountMap">
+	 	<result column="id" property="id" />
+	 	<result column="money" property="money" />
+	 	<result column="open_date" property="openDate" />
+	</resultMap>
+	<resultMap type="Board" id="boardMap">
+		<result column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+		<collection property="commentList" column="no"
+					select="selectCommentList2ByNo"/>
+	</resultMap>
+	<resultMap type="Comment" id="commentMap">
+		<result column="comment_no" property="commentNo"/>
+		<result column="no" property="no"/>
+		<result column="writer" property="writer"/>
+		<result column="content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+	</resultMap>
+	
+	<select id="selectMemberList" resultMap="memberMap">
+		select * 
+		  from tb_mybatis_member
+		 order by id
+	</select>
+	<select id="selectMemberAccountById" parameterType="string" resultMap="accountMap">
+		select *
+		  from tb_mybatis_account
+		 where id = #{id}
+	</select>
+	
+	<!--  게시물과 댓글의 관계 : 일 대 다의 관계 -->
+	<select id="selectBoardList1" resultMap="boardMap">
+		select *
+		  from tb_mybatis_board
+		 order by no desc
+	</select>
+	<select id="selectCommentList1" resultMap="commentMap">
+		select *
+		  from tb_mybatis_comment
+	     order by comment_no
+	</select>
+	<select id="selectCommentList2ByNo" parameterType="int" resultMap="commentMap">
+		select *
+		  from tb_mybatis_comment
+	     where no = #{no}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

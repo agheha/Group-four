@@ -3,18 +3,18 @@ package vo;
 import java.util.Date;
 
 public class Review {
-	private int userNo ;
+	private String userId ;
 	private int stoNo;
 	private int revNo;
-	private int gpa;
-	private String revTitle;
-	private String revContent ;
+	private double gpa;
+	private String revComment ;
 	private Date revRegdate;
-	public int getUserNo() {
-		return userNo;
+	
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public int getStoNo() {
 		return stoNo;
@@ -28,23 +28,17 @@ public class Review {
 	public void setRevNo(int revNo) {
 		this.revNo = revNo;
 	}
-	public int getGpa() {
+	public double getGpa() {
 		return gpa;
 	}
-	public void setGpa(int gpa) {
+	public void setGpa(double gpa) {
 		this.gpa = gpa;
 	}
-	public String getRevTitle() {
-		return revTitle;
+	public String getRevComment() {
+		return revComment;
 	}
-	public void setRevTitle(String revTitle) {
-		this.revTitle = revTitle;
-	}
-	public String getRevContent() {
-		return revContent;
-	}
-	public void setRevContent(String revContent) {
-		this.revContent = revContent;
+	public void setRevComment(String revComment) {
+		this.revComment = revComment;
 	}
 	public Date getRevRegdate() {
 		return revRegdate;
