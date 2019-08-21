@@ -1,5 +1,6 @@
 package user.userInfo.ui;
 
+import main.MainUI;
 import session.LoginStatus;
 import user.dao.UserDAO;
 import user.ui.BaseUI;
@@ -17,7 +18,10 @@ public class UserInfoUI extends BaseUI{
 			switch(menu()) {
 				case 1: new selectOneUserUI().service(); break;
 				case 2: new passUpdateUI().service(); break;
-				case 3: new userDeleteUI().service(); break;
+				case 3: 
+					new userDeleteUI().service(); 
+					if(LoginStatus.login == null) new MainUI().service();
+					break;
 				case 0:
 					return;
 				default :

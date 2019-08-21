@@ -1,4 +1,4 @@
-package user.ui;
+package g4.mini.user.test;
 
 import java.util.regex.Pattern;
 

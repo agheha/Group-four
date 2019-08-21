@@ -45,7 +45,7 @@ public class UserDAO {
 			
 			ResultSet rs = pstmt.executeQuery();
 			
-			System.out.println(rs.next());
+//			System.out.println(rs.next());
 			// 입력한 아이디에 대한 값이 있을 경우 true를, 없을경우 false를 반환
 			return rs.next();
 			
@@ -95,15 +95,15 @@ public class UserDAO {
 	
 	
 	// 비밀번호 변경하는 메서드
-	public void passUpdate(int no, String pass) {
+	public void passUpdate(User u) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			SQLExecutor.update(
 					"UPDATE user_tb   " + 
-					  " SET title = ? " +
-				    " WHERE no = ? ",
-					no, pass
+					  " SET user_pass = ? " +
+				    " WHERE user_no = ? ",
+				    u.getUserPass(), u.getUserNo() 
 					);
 			
 		} catch (Exception e) {
@@ -117,14 +117,14 @@ public class UserDAO {
 		try {
 			SQLExecutor.update(
 					"DELETE  from user_tb " +
-					       "where no = ?", 
+					       "where user_no = ?", 
 					no
 					);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		
-//		LoginStatus.login = null;
+		LoginStatus.login = null;
 	}
 
 	}
