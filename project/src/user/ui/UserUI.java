@@ -64,6 +64,7 @@ public class UserUI {
 		System.out.println("-------------------------");
 	}
 
+	
 	public void userJoin() {
 		while(true) {
 			System.out.println("회원가입");

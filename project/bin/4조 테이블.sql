@@ -3,18 +3,18 @@
 -- store_tb Table Create SQL
 CREATE TABLE store_tb
 (
-    sto_no                  number           NULL, 
+    sto_no                  NUMBER           NULL, 
     sto_id                  VARCHAR2(30)     NOT NULL, 
     sto_pass                VARCHAR2(30)     NOT NULL, 
     sto_name                VARCHAR2(50)     NOT NULL, 
-    rst_menu     VARCHAR2(50)     NOT NULL, 
+    rst_Menu     VARCHAR2(50)     NOT NULL, 
     rst_price    NUMBER           NOT NULL, 
     sto_type                VARCHAR2(10)     NOT NULL, 
     bit_distance            NUMBER           NOT NULL, 
     sto_gpa                 NUMBER           NULL, 
     sto_addr                VARCHAR2(300)    NULL, 
-    sto_hours               VARCHAR2(8)      NULL, 
-    sto_phone_number        VARCHAR2(13)	NULL, 
+    sto_hours               VARCHAR2(11)     NULL, 
+    sto_phone_number        VARCHAR2(15)     NULL, 
     sto_seat                NUMBER           NULL, 
     sto_now_seat            NUMBER           NULL, 
     bit_position            NUMBER           NULL, 
@@ -78,12 +78,12 @@ COMMENT ON COLUMN store_tb.acc_reservation IS '누적예약수'
 -- store_tb Table Create SQL
 CREATE TABLE user_tb
 (
-    user_no       NUMBER          NULL, 
+    user_no       NUMBER          NOT NULL, 
     user_id       VARCHAR2(30)    NOT NULL, 
     user_pass     VARCHAR2(30)    NOT NULL, 
     user_name     VARCHAR2(30)    NOT NULL, 
     user_birth    VARCHAR2(8)     NOT NULL, 
-    CONSTRAINT USER_TB_PK PRIMARY KEY (user_no)
+    CONSTRAINT USER_TB_PK PRIMARY KEY (user_id)
 )
 /
 
@@ -109,49 +109,45 @@ COMMENT ON COLUMN user_tb.user_birth IS '회원 생년월일'
 -- store_tb Table Create SQL
 CREATE TABLE review_tb
 (
-    user_no            NUMBER            NULL, 
-    sto_no             NUMBER            NULL, 
-    rev_no          NUMBER            NULL, 
-    gpa				NUMBER	  default 0,
-    rev_title       VARCHAR2(300)     NOT NULL, 
-    rev_content     VARCHAR2(1000)    NOT NULL, 
-    rev_reg_date    DATE   default     sysdate, 
-    CONSTRAINT USER_REVIEW_TB_PK PRIMARY KEY (user_no, sto_no, rev_no)
+    user_id         VARCHAR2(30)      NOT NULL, 
+    sto_no          NUMBER            NOT NULL, 
+    rev_no          NUMBER            NOT NULL, 
+    gpa		    NUMBER	      NOT NULL,
+    rev_comment         VARCHAR2(1000)    NOT NULL, 
+    rev_reg_date    DATE   default  sysdate     NULL, 
+    CONSTRAINT REVIEW_TB_PK PRIMARY KEY (user_id, sto_no, rev_no)
 )
 /
 
 COMMENT ON TABLE review_tb IS '리뷰'
 /
 
-COMMENT ON COLUMN review_tb.user_no IS '회원번호'
+COMMENT ON COLUMN review_tb.user_id IS '회원아이디'
 /
 
 COMMENT ON COLUMN review_tb.sto_no IS '가게번호'
 /
 
-COMMENT ON COLUMN review_tb.gpa IS '평점'
-/
-
 COMMENT ON COLUMN review_tb.rev_no IS '리뷰번호'
 /
 
-COMMENT ON COLUMN review_tb.rev_title IS '리뷰제목'
+COMMENT ON COLUMN review_tb.rev_no IS '평점'
 /
 
-COMMENT ON COLUMN review_tb.rev_content IS '리뷰내용'
+COMMENT ON COLUMN review_tb.rev_comment IS '댓글'
 /
 
 COMMENT ON COLUMN review_tb.rev_reg_date IS '리뷰등록일'
 /
 
 ALTER TABLE review_tb
-    ADD CONSTRAINT FK_user_review_tb_user_no_user FOREIGN KEY (user_no)
-        REFERENCES user_tb (user_no)
+    ADD CONSTRAINT FK_review_tb_sto_no_store_tb_s FOREIGN KEY (sto_no)
+        REFERENCES store_tb (sto_no)
 /
 
 ALTER TABLE review_tb
-    ADD CONSTRAINT FK_user_review_tb_sto_no_store FOREIGN KEY (sto_no)
-        REFERENCES store_tb (sto_no)
+    ADD CONSTRAINT FK_review_tb_user_id_user_tb_u FOREIGN KEY (user_id)
+        REFERENCES user_tb (user_id)
 /
 
 
@@ -177,12 +173,11 @@ COMMENT ON COLUMN admin_tb.admin_pass IS '관리자비밀번호'
 -- store_tb Table Create SQL
 CREATE TABLE store_menu_tb
 (
-    sto_no     NUMBER          NULL, 
-    menu_no   NUMBER	   NOT NULL,
+    sto_no     NUMBER          NOT NULL, 
     menu       VARCHAR2(50)    NOT NULL, 
     price      NUMBER          NOT NULL, 
     calorie    NUMBER          NULL, 
-    CONSTRAINT STORE_MENU_TB_PK PRIMARY KEY (sto_no, menu_no)
+    CONSTRAINT STORE_MENU_TB_PK PRIMARY KEY (sto_no, menu)
 )
 /
 
@@ -210,27 +205,31 @@ ALTER TABLE store_menu_tb
 -- store_tb Table Create SQL
 CREATE TABLE reservation_tb
 (
-    user_no       NUMBER    NULL, 
-    sto_no        NUMBER    NULL, 
-    rsv_person    NUMBER    NOT NULL, 
-    rsv_date      DATE  default  sysdate, 
-    CONSTRAINT RESERVATION_TB_PK PRIMARY KEY (user_no, sto_no)
+    user_id       VARCHAR2(30)    NOT NULL, 
+    sto_no        NUMBER          NOT NULL, 
+    rsv_person	  NUMBER          NOT NULL, 
+    rsv_date      DATE   default  sysdate     NULL, 
+    rsv_no        NUMBER          NULL, 
+    CONSTRAINT RESERVATION_TB_PK PRIMARY KEY (user_id, sto_no, rsv_date)
 )
 /
 
 COMMENT ON TABLE reservation_tb IS '예약'
 /
 
-COMMENT ON COLUMN reservation_tb.user_no IS '회원번호'
+COMMENT ON COLUMN reservation_tb.user_id IS '회원아이디'
 /
 
 COMMENT ON COLUMN reservation_tb.sto_no IS '가게번호'
 /
 
-COMMENT ON COLUMN reservation_tb.rsv_person IS '예약인원'	
+COMMENT ON COLUMN reservation_tb.rsv_person IS '예약인원'
 /
 
 COMMENT ON COLUMN reservation_tb.rsv_date IS '예약날짜'
+/
+
+COMMENT ON COLUMN reservation_tb.rsv_no IS '대기번호'
 /
 
 ALTER TABLE reservation_tb
@@ -239,6 +238,8 @@ ALTER TABLE reservation_tb
 /
 
 ALTER TABLE reservation_tb
-    ADD CONSTRAINT FK_reservation_tb_user_no_user FOREIGN KEY (user_no)
-        REFERENCES user_tb (user_no)
+    ADD CONSTRAINT FK_reservation_tb_user_id_user FOREIGN KEY (user_id)
+        REFERENCES user_tb (user_id)
 /
+
+

@@ -1,11 +1,11 @@
 package reservation.ui;
 
-import review.dao.ReviewDAO;
+import store.info.dao.StoreInfoDAO;
 
 public class ReservationUI {
-	ReviewDAO dao;
+	StoreInfoDAO dao;
 	
-	public ReservationUI(ReviewDAO dao) {
+	public ReservationUI(StoreInfoDAO dao) {
 		this.dao = dao;
 	}
 	public void service() {
