@@ -1,4 +1,4 @@
-package user;
+package user.vo;
 
 public class User {
 	private int userNo;

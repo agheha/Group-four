@@ -1,4 +1,4 @@
-package user;
+package user.ui;
 
 import java.util.Scanner;
 
@@ -13,8 +13,9 @@ public abstract class BaseUI {
 	
 	// String title = getString("제목을 입력하세요 : ");
 	protected String getString(String msg) {
-		System.out.println(msg);
-		return sc.nextLine();
+		System.out.print(msg);
+		String str = sc.nextLine();
+		return str.trim();
 	}
 	protected int getInt(String msg) {
 		/*
