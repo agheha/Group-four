@@ -42,7 +42,7 @@ values(1, 1, 1, 4, '맛있어요', '생각보다 엄청맛있었어요');
 insert into review_tb(user_no, sto_no, rev_no, gpa, rev_title, rev_content)
 values(1, 2, 2, 3, '그냥 그래요', '기대만큼 맛있지않아요 ');
 insert into review_tb(user_no, sto_no, rev_no, gpa, rev_title, rev_content)
-values(1, 3, 3, 3, '최고에요', '완전맛있어요 ');
+values(1, , 3, 3, '최고에요', '완전맛있어요 ');
 insert into review_tb(user_no, sto_no, rev_no, gpa, rev_title, rev_content)
 values(2, 1, 1, 4, '맛있어요', '생각보다 엄청맛있었어요');
 insert into review_tb(user_no, sto_no, rev_no, gpa, rev_title, rev_content)
