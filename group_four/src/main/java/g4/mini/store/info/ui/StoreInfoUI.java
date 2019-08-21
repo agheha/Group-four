@@ -14,9 +14,9 @@ public class StoreInfoUI {
 		while(true) {
 			switch(menu()) {
 			case 1 : new ListReviewUI().service(); break; 
-			case 2 : new WriteReviewUI(dao).service(); break;
-			case 3 : new ReservationUI(dao).service(); break;
-			case 4 : break; 
+			case 2 : new WriteReviewUI().service(); break;
+			case 3 : new ReservationUI().service(); break;
+			case 4 : new StoreMenuUI().service(); break; 
 			case 5 : 
 				StoreSearchStatus.store = null; 
 				new StoreListUI().service();
@@ -46,7 +46,7 @@ public class StoreInfoUI {
 		System.out.println("1. 리뷰 및 평점보기");
 		System.out.println("2. 리뷰 쓰기");
 		System.out.println("3. 예약 하기");
-		System.out.println("4. 메뉴 보기");		
+		System.out.println("4. 메뉴 상세보기");		
 		System.out.println("5. 이전으로 돌아가기");
 		System.out.println("0. 종료");
 		System.out.println("-------------------------------------------------------------------------------------");

@@ -1,17 +1,21 @@
 package g4.mini.store.info.ui;
 
+import org.apache.ibatis.session.SqlSession;
+
+import g4.mini.common.db.MyAppSqlConfig;
 import g4.mini.session.StoreSearchStatus;
-import g4.mini.store.info.dao.StoreInfoDAO;
+import g4.mini.store.info.dao.StoreInfoMapper;
 import g4.mini.ui.BaseUI;
 import g4.mini.vo.Review;
 
 public class WriteReviewUI extends BaseUI {
-	StoreInfoDAO dao;
-	
-	public WriteReviewUI(StoreInfoDAO dao) {
-		this.dao = dao;
+	private StoreInfoMapper mapper;
+	int stoNo = StoreSearchStatus.store.getStoNo();
+	String userId = "qweqwe123";
+	public WriteReviewUI() {
+		SqlSession session = MyAppSqlConfig.getSqlSessionInstance();
+		mapper = session.getMapper(StoreInfoMapper.class);
 	}
-	// 리뷰 쓰기 UI
 	public void service() {
 		boolean flag = true;
 		double gpa = 0;
@@ -23,10 +27,12 @@ public class WriteReviewUI extends BaseUI {
 		}
 		String comment = getString("☞ 리뷰 제목을 입력해주세요 : ");
 		Review rev = new Review();
+		rev.setStoNo(stoNo);
+		rev.setUserId(userId);
 		rev.setGpa(gpa);
 		rev.setRevComment(comment);
-		dao.gpaAvg(StoreSearchStatus.store.getStoNo(),gpa);
-		dao.insertReview(rev);
+		mapper.insertReview(rev);
+		
 		System.out.println("댓글 등록이 안료되었습니다.");
 	}
 	

@@ -5,7 +5,7 @@ import g4.mini.store.info.dao.StoreInfoDAO;
 public class ReservationUI {
 	StoreInfoDAO dao;
 	
-	public ReservationUI(StoreInfoDAO dao) {
+	public ReservationUI() {
 		this.dao = dao;
 	}
 	public void service() {
