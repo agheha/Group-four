@@ -24,6 +24,8 @@ public class selectOneUserUI extends BaseUI{
 		System.out.println("아이디 : " + user.getUserId());
 		System.out.println("비밀번호 : " + user.getUserPass());
 		System.out.println("생년월일 : " + user.getUserBirth());
+		System.out.println("핸드폰번호 : " + user.getUserPH());
+		System.out.println("이메일 : " + user.getUserEmail());
 		System.out.println("-------------------------");
 	}
 }

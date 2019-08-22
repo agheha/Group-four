@@ -8,6 +8,7 @@ import g4.mini.user.test.LoginUI;
 import g4.mini.user.test.LogoutUI;
 import g4.mini.user.test.UserInfoUI;
 import g4.mini.user.test.UserJoinUI;
+import g4.mini.user.test.findUserInfoUI;
 
 public class MainUI {
 	private Scanner sc = new Scanner(System.in);
@@ -18,12 +19,14 @@ public class MainUI {
 		System.out.println("------------------------------");
 		if(LoginStatus.login != null) {
 			System.out.println("1. 맛집 보기");
-			System.out.println("2. 회원 정보");
+			System.out.println("2. 예약 확인");
+			System.out.println("3. 회원 정보");
 			System.out.println("0. 로그 아웃");
 		}else {
 			System.out.println("1. ★오늘의 메뉴★");
 			System.out.println("2. 로그인");
 			System.out.println("3. 회원가입");
+			System.out.println("4. 아이디/비밀번호 찾기");
 			System.out.println("0. 종료");
 		}
 		System.out.println("------------------------------");
@@ -35,8 +38,9 @@ public class MainUI {
 	private BaseUI loginMenu() {
 			while(true) {
 				switch (menu()) {
-				case 1: break;
-				case 2: return new UserInfoUI(); 
+//				case 1: new StoreListUI();
+//				case 2: new CheckRsvUI(); 
+				case 3: return new UserInfoUI(); 
 				case 0: return new LogoutUI();
 				default:
 					System.out.println("잘못된 메뉴번호 입니다.");
@@ -51,6 +55,7 @@ public class MainUI {
 			case 1: break;
 			case 2: return new LoginUI();
 			case 3: return new UserJoinUI();
+			case 4: return new findUserInfoUI();
 			case 0:
 				System.out.println("프로그램을 종료합니다. ");
 				System.exit(0);

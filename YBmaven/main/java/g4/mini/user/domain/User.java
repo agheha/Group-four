@@ -6,6 +6,22 @@ public class User {
 	private String userPass;
 	private String userName;
 	private String userBirth;
+	private String userPH;
+	private String userEmail;
+	
+	
+	public String getUserPH() {
+		return userPH;
+	}
+	public void setUserPH(String userPH) {
+		this.userPH = userPH;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 	public int getUserNo() {
 		return userNo;
 	}

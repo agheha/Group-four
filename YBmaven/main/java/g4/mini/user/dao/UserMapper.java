@@ -21,6 +21,12 @@ public interface UserMapper {
 	
 	// 회원탈퇴
 	void deleteUser(int userNo);
+	
+	// 아이디 찾기
+	User findUserId(User user);
+	
+	// 비밀번호 찾기
+	User findUserPass(User user);
 }
 
 
