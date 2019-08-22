@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="g4.mini.user.dao.UserMapper">
+	<resultMap type="User" id="userMap">
+		<result column="user_no" property="joinDate" />
+		<result column="user_id" property="userId" />
+		<result column="user_pass" property="userPass" />
+		<result column="user_name" property="userName" />
+		<result column="user_birth" property="userBirth" />
+	</resultMap>
+
+
+	<!-- user 회원가입 -->
+	<insert id="userJoin" parameterType="User">
+		insert into user_tb(
+		user_no, user_id, user_pass, user_name, user_birth
+		) values (
+		seq_user_no.nextval,
+		#{userId},
+		#{userPass},
+		#{userName},
+		#{userBirth}
+		)
+	</insert>
+
+	<!-- 회원가입의 아이디일치여부 -->
+	<select id="idMatching" parameterType="string" resultType="int">
+		select count(*)
+		from user_tb
+		where user_id = #{userId}
+	</select>
+
+
+	<!-- 회원번호받아 user객체 반환 -->
+	<select id="selectOneUser" parameterType="int" resultType="User">
+		select *
+		from user_tb
+		where user_no = #{userNo}
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="passUpdate" parameterType="User">
+		UPDATE user_tb
+		   SET user_pass = #{userPass}
+		 WHERE user_no = #{userNo}
+	</update>
+
+  	<!-- 회원 탈퇴  -->
+  	<delete id="deleteUser" parameterType="int">
+  		delete from user_tb
+  		      where user_no = #{userNo}
+  	</delete>
+
+
+
+</mapper>

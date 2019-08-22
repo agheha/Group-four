@@ -1,4 +1,4 @@
-package main;
+package g4.mini.main.ui;
 
 import java.util.Scanner;
 import login.ui.LoginUI;
