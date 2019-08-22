@@ -27,14 +27,15 @@ public abstract class BaseUI {
 		int index = 1;
 		for (Store sto : list) {
 			map.put(index, sto);			
-			System.out.printf("%-4d\t%-9s\t%-5s\t%-7s\t%,5d원\t%5dm\t%2d석\n",
+			System.out.printf("%-4d\t%-9s\t%-5s\t%-7s\t%,5d원\t%5dm\t%2d석\t\t%2.1f\n",
 					index++, 
 					sto.getStoName(), 
 					sto.getStoType(),
 					sto.getRstMenu(),
 					sto.getRstPrice(),
 					sto.getBitDistance(),
-					sto.getAccReservation()
+					sto.getAccReservation(),
+					sto.getStoGpa()
 			);
 		}
 		System.out.println("-------------------------------------------------------------------------------------");

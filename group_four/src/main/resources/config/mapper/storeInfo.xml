@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="g4.mini.store.info.dao.StoreInfoMapper">
+	
 	<resultMap type="Store" id="storeMap">
 		<result column="sto_no" property="stoNo"/>
 		<result column="sto_id" property="stoId"/>
@@ -29,6 +30,14 @@
 		<result column="rev_comment" property="revComment"/>
 		<result column="rev_reg_date" property="revRegdate"/>
 	</resultMap>
+	
+	<resultMap type="StoreMenu" id="storeMenuMap">
+		<result column="sto_no" property="stoNo"/>
+		<result column="menu" property="stoMenu"/>
+		<result column="price" property="price"/>
+		<result column="calorie" property="calorie"/>
+	</resultMap>
+	
 	<!-- 리뷰 보기 -->
 	<select id="selectReview" parameterType="int" resultMap="reviewMap">
 		select * 
@@ -37,11 +46,42 @@
 		 order by rev_no
 	</select>
 	
-	<select id="selectReview" parameterType="int" resultMap="reviewMap">
+	<!-- 리뷰 쓰기 -->
+	<insert id="insertReview" parameterType="Review" >
+		insert into review_tb(
+			sto_no, user_id, rev_no, gpa, rev_comment)
+		values( 
+			#{stoNo}, #{userId}, seq_rev_no.nextval, #{gpa}, #{revComment}
+		)
+	</insert>
+	
+	<!-- 메뉴 상세보기 -->
+	<select id="selectMenu" parameterType="int" resultMap="storeMenuMap">
 		select * 
-		  from review_tb
+		  from store_menu_tb
 		 where sto_no = #{stoNo}
-		 order by rev_no
+		 order by price
 	</select>
 	
+	<!--  가게 평점구하기 -->
+	<select id="avgGpa" parameterType="int" resultType="double">
+		select sum(gpa)/count(user_id)
+		  from review_tb
+		 where sto_no = #{stoNo}
+	</select>
+	
+	<!-- 가게 총평점  -->
+ 	<update id="updateStoreGpa" parameterType="Store">
+ 		update store_tb
+ 		   set sto_gpa = round(#{stoGpa},1)
+ 		 where sto_no = #{stoNo}
+ 	</update>
+		
+		
+		
+		
+		
+		
+		
+		
 </mapper>
