@@ -1,7 +1,7 @@
-package login.ui;
+package g4.mini.user.test;
 
-import session.LoginStatus;
-import user.ui.BaseUI;
+import g4.mini.session.LoginStatus;
+import g4.mini.ui.BaseUI;
 
 public class LogoutUI extends BaseUI {
 	public void service() {

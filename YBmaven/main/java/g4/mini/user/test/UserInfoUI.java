@@ -1,17 +1,10 @@
-package user.userInfo.ui;
+package g4.mini.user.test;
 
-import main.MainUI;
-import session.LoginStatus;
-import user.dao.UserDAO;
-import user.ui.BaseUI;
-import user.vo.User;
+import g4.mini.main.ui.MainUI;
+import g4.mini.session.LoginStatus;
+import g4.mini.ui.BaseUI;
 
 public class UserInfoUI extends BaseUI{
-	private UserDAO dao;
-	
-	public UserInfoUI() {
-		dao = new UserDAO();
-	}
 	
 	public void service() {
 		while(true) {

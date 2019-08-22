@@ -1,15 +1,18 @@
-package user.userInfo.ui;
+package g4.mini.user.test;
 
-import session.LoginStatus;
-import user.dao.UserDAO;
-import user.ui.BaseUI;
-import user.vo.User;
+import org.apache.ibatis.session.SqlSession;
+
+import g4.mini.common.db.MyAppSqlConfig;
+import g4.mini.session.LoginStatus;
+import g4.mini.ui.BaseUI;
+import g4.mini.user.dao.UserMapper;
 
 public class userDeleteUI extends BaseUI{
-	private UserDAO dao;
+	private UserMapper mapper;
 	
 	public userDeleteUI() {
-		dao = new UserDAO();
+		SqlSession session = MyAppSqlConfig.getSqlSessionInstance();
+		mapper = session.getMapper(UserMapper.class);
 	}
 	
 	public void service() {
@@ -23,7 +26,9 @@ public class userDeleteUI extends BaseUI{
 				switch(input) {
 				case "y": 
 					System.out.println("회원 탈퇴 되었습니다.");
-					dao.deleteUser(LoginStatus.login.getUserNo());
+					mapper.deleteUser(LoginStatus.login.getUserNo());
+				//	dao.deleteUser(LoginStatus.login.getUserNo());
+					LoginStatus.login = null;
 					return;
 				case "0":
 					return;
