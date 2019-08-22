@@ -30,6 +30,11 @@ public class UserRsvUI extends BaseUI {
 
 		Reservation r = new Reservation();
 		
+		if (mapper.selectRsv(userL.getUserId()) != 0) {
+			System.out.println("이미 예약된 정보가 있습니다.");
+			return;
+		}
+		
 		int i = getInt("예약하실 인원수를 입력해주세요 : ");
 		int nowSeat = store.getStoNowSeat() + i;
 		int seat = store.getStoSeat();

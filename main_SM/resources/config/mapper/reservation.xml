@@ -3,6 +3,14 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="g4.mini.reservation.dao.RsvMapper">
 
+
+	<select id="userCheck" parameterType="String" resultType="int">
+		select count(*)
+		from reservation_tb
+		where user_id = #{user_id}
+	
+	</select>
+	
 	<select id="selectRsvNo" parameterType="int" resultType="int">
 		select rsv_no
 		from reservation_tb
@@ -25,10 +33,11 @@
 	</select>
 
 	<insert id="userRsv" parameterType="Reservation">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+		<selectKey keyProperty="rsvNo" resultType="int" order="BEFORE">
 			select
-			max(rsv_no) + 1
+			nvl(max(rsv_no) + 1, 1)
 			from reservation_tb
+			where sto_no = #{stoNo}
 		</selectKey>
 		insert into reservation_tb (
 		user_id, sto_no, rsv_person, rsv_no, sto_name
@@ -51,7 +60,6 @@
 	<resultMap type="Reservation" id="rsvMap">
 		<result column="sto_name" property="stoName" />
 		<result column="rsv_person" property="rsvPerson" />
-		<result column="rsv_no" property="rsvNo" />
 	</resultMap>
 
 	<!-- 예약확인 테이블 출력 -->
@@ -71,11 +79,19 @@
 
 	<!-- 유저아이디를 카운트해서 0이면 예약x -->
 	<select id="selectRsv" parameterType="String" resultType="int">
-		select
-		count(user_id)
+		select count(*)
 		from reservation_tb
 		where user_id = #{userId}
 	</select>
+
+	<select id="getRsv" parameterType="String" resultMap="rsvMap">
+		select *
+		from reservation_tb
+		where user_id = #{userId}
+	
+	</select>
+
+
 
 	<!-- 유저 아이디로 스토어넘버 추출 -->
 	<select id="selectStoNo" parameterType="String" resultType="int">
@@ -110,10 +126,10 @@
 	</delete>
 
 	<!-- 예약취소 -->
-		<delete id="cancelRsv" parameterType="int">
+		<delete id="cancelRsv" parameterType="String">
 		delete from
 		reservation_tb
-		where user_no = #{userNo}
+		where user_id = #{userId}
 		</delete>
 
 </mapper>

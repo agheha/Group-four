@@ -5,6 +5,8 @@ import g4.mini.vo.Store;
 
 public interface RsvMapper {
 
+	
+	int userCheck(String userId);
 	public Integer selectRsvNo(int stoNo); //대기번호 출력
 	void updateSto(Store s); //인원 업데이트
 	void userRsv(Reservation r); //대기번호 존재 할 시 대기걸린 유저
@@ -14,9 +16,10 @@ public interface RsvMapper {
 	int rsvCount(int stoNo);
 	int selectRsv(String userId);
 	int selectStoNo(String userId);
+	Reservation getRsv(String userId);
 	
 	void updateStore(Store store);
 	int selectMinRsvNo(int stoNo);
 	void deleteMember(int stoNo);
-	void cancelRsv(int userNo);
+	void cancelRsv(String userId);
 }

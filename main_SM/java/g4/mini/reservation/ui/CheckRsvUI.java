@@ -26,22 +26,20 @@ public class CheckRsvUI extends BaseUI {
 	}
 
 	public void service() {
-
-		int no = mapper.selectRsv(userL.getUserId());
-		if (no == 0) {
+		
+		if (mapper.selectRsv(userL.getUserId()) == 0) {
 			System.out.println("예약된 정보가 없습니다.");
 		} else {
-			Reservation r = new Reservation();
 			int stoNo = mapper.selectStoNo(userL.getUserId());
 			
 			System.out.println("가게이름\t예약인원\t대기번호");
 			System.out.println("-------------------------------");
-			System.out.print(mapper.checkRsv(userL.getUserId()));
-			System.out.println(mapper.rsvCount(stoNo));
+			Reservation r = mapper.getRsv(userL.getUserId());
+			System.out.println(r.getStoName() + "  " + r.getRsvPerson() + "  " + mapper.rsvCount(stoNo));
 			
 			String str = getString("예약을 취소 하시겠습니까?(Y/N)");
 			if(str.toUpperCase().equals("Y")) {
-				mapper.cancelRsv(userL.getUserNo());
+				mapper.cancelRsv(userL.getUserId());
 				System.out.println("취소가 완료되었습니다.");
 			}
 		}		
