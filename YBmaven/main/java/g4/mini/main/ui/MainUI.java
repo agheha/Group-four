@@ -17,13 +17,13 @@ public class MainUI {
 		System.out.println("비트캠프 점심메뉴에 오신 것을 환영합니다.");
 		System.out.println("------------------------------");
 		if(LoginStatus.login != null) {
-			System.out.println("1. ★오늘의 메뉴★");
-			System.out.println("2. 맛집 보기");
-			System.out.println("3. 회원 정보");
+			System.out.println("1. 맛집 보기");
+			System.out.println("2. 회원 정보");
 			System.out.println("0. 로그 아웃");
 		}else {
-			System.out.println("1. 로그인");
-			System.out.println("2. 회원가입");
+			System.out.println("1. ★오늘의 메뉴★");
+			System.out.println("2. 로그인");
+			System.out.println("3. 회원가입");
 			System.out.println("0. 종료");
 		}
 		System.out.println("------------------------------");
@@ -36,9 +36,8 @@ public class MainUI {
 			while(true) {
 				switch (menu()) {
 				case 1: break;
-				case 2: break;
-				case 3: return new UserInfoUI(); 
-				case 0: return new LogoutUI(); 
+				case 2: return new UserInfoUI(); 
+				case 0: return new LogoutUI();
 				default:
 					System.out.println("잘못된 메뉴번호 입니다.");
 					System.out.println("다시 선택해 주세요.");
@@ -49,8 +48,9 @@ public class MainUI {
 	private BaseUI beforeloginMenu() {
 		while(true) {
 			switch(menu()) {
-			case 1: return new LoginUI(); 
-			case 2: return new UserJoinUI();
+			case 1: break;
+			case 2: return new LoginUI();
+			case 3: return new UserJoinUI();
 			case 0:
 				System.out.println("프로그램을 종료합니다. ");
 				System.exit(0);
