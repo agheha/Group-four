@@ -62,4 +62,26 @@
 		 where sto_no = #{stoNo}
 		 order by price
 	</select>
+	
+	<!--  가게 평점구하기 -->
+	<select id="avgGpa" parameterType="int" resultType="double">
+		select sum(gpa)/count(user_id)
+		  from review_tb
+		 where sto_no = #{stoNo}
+	</select>
+	
+	<!-- 가게 총평점  -->
+ 	<update id="updateStoreGpa" parameterType="Store">
+ 		update store_tb
+ 		   set sto_gpa = round(#{stoGpa},1)
+ 		 where sto_no = #{stoNo}
+ 	</update>
+		
+		
+		
+		
+		
+		
+		
+		
 </mapper>

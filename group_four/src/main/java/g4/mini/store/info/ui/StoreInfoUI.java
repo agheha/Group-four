@@ -9,7 +9,6 @@ import g4.mini.store.list.ui.StoreListUI;
 
 public class StoreInfoUI {
 	Scanner sc = new Scanner(System.in);
-	StoreInfoDAO dao = new StoreInfoDAO();
 	public void service() {
 		while(true) {
 			switch(menu()) {
@@ -43,8 +42,8 @@ public class StoreInfoUI {
 		System.out.println("좌석수 : " + StoreSearchStatus.store.getStoSeat());		
 		System.out.println("실시간 좌석수 : " + StoreSearchStatus.store.getStoNowSeat());		
 		System.out.println("-------------------------------------------------------------------------------------");
-		System.out.println("1. 리뷰 및 평점보기");
-		System.out.println("2. 리뷰 쓰기");
+		System.out.println("1. 평점 및 리뷰보기");
+		System.out.println("2. 평점 및 리뷰쓰기");
 		System.out.println("3. 예약 하기");
 		System.out.println("4. 메뉴 상세보기");		
 		System.out.println("5. 이전으로 돌아가기");
