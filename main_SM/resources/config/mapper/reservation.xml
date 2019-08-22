@@ -30,11 +30,11 @@
 			max(rsv_no) + 1
 			from reservation_tb
 		</selectKey>
-		insert reservation_tb (
+		insert into reservation_tb (
 		user_id, sto_no, rsv_person, rsv_no, sto_name
 		)
 		values(
-		#{userId}, #{stoNo}, #{rsvPerson}, #{no}, #{stoName}
+		#{userId}, #{stoNo}, #{rsvPerson}, #{rsvNo}, #{stoName}
 		)
 	</insert>
 

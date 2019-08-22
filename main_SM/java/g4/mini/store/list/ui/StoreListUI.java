@@ -2,9 +2,11 @@ package g4.mini.store.list.ui;
 
 import java.util.Scanner;
 
+import g4.mini.main.ui.MainUI;
 import g4.mini.store.list.dao.StoreListDAO;
+import g4.mini.ui.BaseUI;
 
-public class StoreListUI {
+public class StoreListUI extends BaseUI{
 	
 	Scanner sc = new Scanner(System.in);
 	StoreListDAO dao = new StoreListDAO();
@@ -16,7 +18,7 @@ public class StoreListUI {
 			case 3 : new GpaListUI().service(); break; 
 			case 4 : new DistanceListUI().service(); break; 
 			case 5 : new AccReservationListUI().service(); break; 
-			case 6 : return;
+			case 6 : new MainUI().service(); break;
 			case 0 :
 				System.exit(0);
 				System.out.println("프로그램을 종료합니다.");
@@ -43,9 +45,9 @@ public class StoreListUI {
 		
 	}
 	
-	public static void main(String[] args) {
-		new StoreListUI().service();
-	}
+//	public static void main(String[] args) {
+//		new StoreListUI().service();
+//	}
 }
 
 

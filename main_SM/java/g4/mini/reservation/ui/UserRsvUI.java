@@ -27,6 +27,8 @@ public class UserRsvUI extends BaseUI {
 	}
 	
 	public void service()  {
+
+		Reservation r = new Reservation();
 		
 		int i = getInt("예약하실 인원수를 입력해주세요 : ");
 		int nowSeat = store.getStoNowSeat() + i;
@@ -38,7 +40,6 @@ public class UserRsvUI extends BaseUI {
 			s.setAccReservation(store.getAccReservation() + i);
 			mapper.updateSto(s);
 		} else {
-			Reservation r = new Reservation();
 			r.setUserId(userL.getUserId());
 			r.setStoNo(store.getStoNo());
 			r.setRsvPerson(i);

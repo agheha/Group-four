@@ -35,13 +35,13 @@ public class MainUI {
 	}
 		
 		
-	private void loginMenu() {
+	private BaseUI loginMenu() {
 			while(true) {
 				switch (menu()) {
-				case 1: new StoreListUI();
-				case 2: new CheckRsvUI(); 
-				case 3: new UserInfoUI(); 
-				case 0: new LogoutUI();
+				case 1: return new StoreListUI();
+				case 2: return new CheckRsvUI(); 
+				case 3: return new UserInfoUI(); 
+				case 0: return new LogoutUI();
 				default:
 					System.out.println("잘못된 메뉴번호 입니다.");
 					System.out.println("다시 선택해 주세요.");
