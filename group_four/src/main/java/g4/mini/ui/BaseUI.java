@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import g4.mini.session.StoreSearchStatus;
 import g4.mini.store.info.ui.StoreInfoUI;
+import g4.mini.store.list.ui.StoreListUI;
 import g4.mini.vo.Store;
 
 public abstract class BaseUI {
@@ -45,7 +46,7 @@ public abstract class BaseUI {
 			if (StoreSearchStatus.store != null) new StoreInfoUI().service(); 
 			if (choice == 0) {
 				list.clear();
-				return;				
+				return;		
 			}System.out.println("해당하는 가게번호를 찾을수 없습니다.");
 		}
 	}

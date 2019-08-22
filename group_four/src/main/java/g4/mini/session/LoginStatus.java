@@ -1,7 +1,6 @@
 package g4.mini.session;
 
-import g4.mini.user.domain.User;
-
+import g4.mini.vo.User;
 
 public class LoginStatus {
 	// 저장되는 공간

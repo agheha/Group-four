@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="g4.mini.store.list.dao.StoreListMapper">
-		<resultMap type="Store" id="storeMap">
+<mapper namespace="g4.mini.store.dao.StoreMapper">
+	
+	<resultMap type="Store" id="storeMap">
 		<result column="sto_no" property="stoNo"/>
 		<result column="sto_id" property="stoId"/>
 		<result column="sto_pass" property="stoPass"/>
@@ -20,35 +21,61 @@
 		<result column="bit_position" property="bitPosition"/>
 		<result column="acc_reservation" property="accReservation"/>
 	</resultMap>
-	<select id="priceList" parameterType="SearchList" resultMap="storeMap">
-		select * 
-		  from store_tb
-		 where rst_price between #{startPrice} and #{endPrice}
-		 order by rst_price
-	</select>
 	
-	<select id="typeList" parameterType="string" resultMap="storeMap">
-		select * 
-		  from store_tb
-		 where sto_type = #{type}
-		 order by sto_type
+	<select id="storeLogin" parameterType="Store" resultMap="storeMap">
+		select *
+		from store_tb
+		where sto_id = #{stoId} 
+		and sto_pass = #{stoPass}
 	</select>
-	
-	<select id="gpaList" resultMap="storeMap">
-		select * 
-		  from store_tb
-		 order by sto_gpa
+
+
+	<!-- user 회원가입 -->
+	<insert id="storeJoin" parameterType="Store">
+		insert into store_tb(
+		sto_no, sto_id, sto_pass, sto_name, rst_menu, rst_price, sto_type, bit_distance, sto_addr, sto_hours, sto_phone_number, sto_seat)
+		values (
+		seq_store_no.nextval,
+		#{stoId},
+		#{stoPass},
+		#{stoName},
+		#{rstMenu},
+		#{rstPrice},
+		#{stoType},
+		#{bitDistance},
+		#{stoAddr},
+		#{stoHours},
+		#{stoPhoneNumber},
+		#{stoSeat}
+		)
+	</insert>
+
+	<!-- 회원가입의 아이디일치여부 -->
+	<select id="idMatching" parameterType="string" resultType="int">
+		select count(*)
+		from store_tb
+		where sto_id = #{stoId}
 	</select>
-	
-	<select id="distanceList" resultMap="storeMap">
-		select * 
-		  from store_tb
-		 order by bit_distance
+
+
+	<!-- 회원번호받아 user객체 반환 -->
+	<select id="selectOneStore" parameterType="int" resultMap="storeMap">
+		select *
+		from store_tb
+		where sto_no = #{stoNo}
 	</select>
-	
-	<select id="acRevList" resultMap="storeMap">
-		select * 
-		  from store_tb
-		 order by ACC_RESERVATION
-	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="passUpdate" parameterType="User">
+		UPDATE user_tb
+		SET user_pass = #{userPass}
+		WHERE sto_no = #{stoNo}
+	</update>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="Store">
+		delete from store_tb
+		where sto_no = #{stoNo}
+	</delete>
 </mapper>
+	

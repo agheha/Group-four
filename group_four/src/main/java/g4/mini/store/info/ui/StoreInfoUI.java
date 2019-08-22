@@ -2,9 +2,8 @@ package g4.mini.store.info.ui;
 
 import java.util.Scanner;
 
-import g4.mini.reservation.ui.ReservationUI;
+import g4.mini.reservation.ui.UserReservationUI;
 import g4.mini.session.StoreSearchStatus;
-import g4.mini.store.info.dao.StoreInfoDAO;
 import g4.mini.store.list.ui.StoreListUI;
 
 public class StoreInfoUI {
@@ -14,7 +13,7 @@ public class StoreInfoUI {
 			switch(menu()) {
 			case 1 : new ListReviewUI().service(); break; 
 			case 2 : new WriteReviewUI().service(); break;
-			case 3 : new ReservationUI().service(); break;
+			case 3 : new UserReservationUI().service(); break;
 			case 4 : new StoreMenuUI().service(); break; 
 			case 5 : 
 				StoreSearchStatus.store = null; 

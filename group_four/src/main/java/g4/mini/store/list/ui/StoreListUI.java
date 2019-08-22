@@ -35,16 +35,12 @@ public class StoreListUI {
 		System.out.println("3. 평점순 보기");
 		System.out.println("4. 거리순 보기");
 		System.out.println("5. 누적예약순 보기");
-		System.out.println("6. 이전 돌아가기");
+		System.out.println("6. 이전 화면");
 		System.out.println("0. 종료");
 		System.out.println("-------------------------------------------------------------------------------------");
 		System.out.print("☞ 메뉴를 선택해주세요 : ");
 		return Integer.parseInt(sc.nextLine());
 		
-	}
-	
-	public static void main(String[] args) {
-		new StoreListUI().service();
 	}
 }
 

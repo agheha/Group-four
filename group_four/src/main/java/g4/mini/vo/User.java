@@ -6,6 +6,7 @@ public class User {
 	private String userPass;
 	private String userName;
 	private String userBirth;
+	
 	public int getUserNo() {
 		return userNo;
 	}
@@ -36,6 +37,4 @@ public class User {
 	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
 	}
-
-	
 }

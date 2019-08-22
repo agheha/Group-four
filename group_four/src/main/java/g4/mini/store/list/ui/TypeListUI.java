@@ -1,16 +1,10 @@
 package g4.mini.store.list.ui;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import g4.mini.common.db.MyAppSqlConfig;
-import g4.mini.session.LoginStatus;
-import g4.mini.session.StoreSearchStatus;
-import g4.mini.store.info.ui.StoreInfoUI;
-import g4.mini.store.list.dao.StoreListDAO;
 import g4.mini.store.list.dao.StoreListMapper;
 import g4.mini.ui.BaseUI;
 import g4.mini.vo.Store;
