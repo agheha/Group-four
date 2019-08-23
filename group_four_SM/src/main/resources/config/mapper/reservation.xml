@@ -1,0 +1,135 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g4.mini.reservation.dao.ReservationMapper">
+
+
+	<select id="userCheck" parameterType="String" resultType="int">
+		select count(*)
+		from reservation_tb
+		where user_id = #{user_id}
+	
+	</select>
+	
+	<select id="selectRsvNo" parameterType="int" resultType="int">
+		select rsv_no
+		from reservation_tb
+		where sto_no = #{stoNo}
+	</select>
+
+	<update id="updateSto" parameterType="Store">
+		update store_tb
+		set sto_now_seat = #{stoNowSeat},
+			acc_reservation = #{accReservation}
+		where sto_no = #{stoNo}
+	</update>
+
+	<select id="rsvCount" parameterType="int" resultType="int">
+		select
+		count(*)
+		from reservation_tb
+		where sto_no = #{stoNo}
+
+	</select>
+
+	<insert id="userRsv" parameterType="Reservation">
+		<selectKey keyProperty="rsvNo" resultType="int" order="BEFORE">
+			select
+			nvl(max(rsv_no) + 1, 1)
+			from reservation_tb
+			where sto_no = #{stoNo}
+		</selectKey>
+		insert into reservation_tb (
+		user_id, sto_no, rsv_person, rsv_no, sto_name
+		)
+		values(
+		#{userId}, #{stoNo}, #{rsvPerson}, #{rsvNo}, #{stoName}
+		)
+	</insert>
+
+	<!-- 예약됐는지 안했는지 체크 카운트 -->
+	<select id="checkMyRsv" parameterType="Reservation"
+		resultType="int">
+		select count(*)
+		from reservation_tb
+		where sto_no = #{stoNo}
+		and user_id = #{userId}
+	</select>
+
+
+	<resultMap type="Reservation" id="rsvMap">
+		<result column="sto_name" property="stoName" />
+		<result column="rsv_person" property="rsvPerson" />
+	</resultMap>
+
+	<!-- 예약확인 테이블 출력 -->
+	<select id="checkRsv" parameterType="String" resultMap="rsvMap">
+		select *
+		from reservation_tb
+		where user_id = #{userId}
+	</select>
+
+	<!-- 스토어 번호에 따른 이름 출력 -->
+	<select id="stoName" parameterType="int" resultType="String">
+		select
+		sto_name
+		from store_tb
+		where sto_no = #{stoNo}
+	</select>
+
+	<!-- 유저아이디를 카운트해서 0이면 예약x -->
+	<select id="selectRsv" parameterType="String" resultType="int">
+		select count(*)
+		from reservation_tb
+		where user_id = #{userId}
+	</select>
+
+	<select id="getRsv" parameterType="String" resultMap="rsvMap">
+		select *
+		from reservation_tb
+		where user_id = #{userId}
+	
+	</select>
+
+
+
+	<!-- 유저 아이디로 스토어넘버 추출 -->
+	<select id="selectStoNo" parameterType="String" resultType="int">
+		select sto_no
+		from reservation_tb
+		where user_id = #{userId}
+	</select>
+
+	<!-- 가게쪽 예약 -->
+
+	<update id="updateStore" parameterType="Store">
+			update store_tb
+			set sto_now_seat = #{stoNowSeat}
+			where sto_no = #{stoNo}
+	</update>
+
+	<!-- 첫번째 대기인원수 출력 -->
+	<select id="selectMinRsvNo" parameterType="int" resultType="int">
+		select rsv_person
+		from reservation_tb
+		where sto_no = #{stoNo}
+		and rsv_no
+		= (select min(rsv_no) from reservation_tb where sto_no = #{stoNo})
+	</select>
+
+	<!-- 첫번째 대기자 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		delete from
+		reservation_tb
+		where sto_no = #{stoNo}
+		and rsv_no = (select min(rsv_no) from reservation_tb where sto_no = #{stoNo});
+	</delete>
+
+	<!-- 예약취소 -->
+		<delete id="cancelRsv" parameterType="String">
+		delete from
+		reservation_tb
+		where user_id = #{userId}
+		</delete>
+
+</mapper>

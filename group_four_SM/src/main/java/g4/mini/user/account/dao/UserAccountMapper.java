@@ -1,0 +1,15 @@
+package g4.mini.user.account.dao;
+
+import g4.mini.vo.User;
+
+public interface UserAccountMapper {
+	
+	// 비밀번호 변경
+	void passUpdate(User user);
+
+	// 회원탈퇴
+	void deleteUser(int userNo);
+	
+	// 회원번호 받아 user객체 하나 반환
+	User selectOneUser(int userNo);
+}
