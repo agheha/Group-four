@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g4.mini.store.list.dao.RandomMapper">
+	<!-- 랜덤한 가게 번호 출력 -->
+	<select id="selectRandom" resultType="int">
+	     select count(*)
+	       from store_tb
+	</select>
+</mapper>
