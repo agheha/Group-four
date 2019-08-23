@@ -1,0 +1,86 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g4.mini.admin.dao.AdministratorMapper">
+
+	<resultMap type="User" id="userMap">
+		<result column="user_no" property="userNo" />
+		<result column="user_id" property="userId" />
+		<result column="user_pass" property="userPass" />
+		<result column="user_name" property="userName" />
+		<result column="user_birth" property="userBirth" />
+	</resultMap>
+
+	<!-- 전체 회원 출력 -->
+	<select id="selectMemberList" resultMap="userMap">
+		select *
+		from user_tb
+		order by user_no
+	</select>
+	<!-- 선택한 해당회원 출력 -->
+	<select id="memberSelect" parameterType="int" resultMap="userMap">
+		select *
+		from user_tb
+		where user_no = #{userNo}
+	</select>
+	
+	<update id="memberUpdate" parameterType="User">
+		update user_tb
+		set user_name = #{userName},
+		user_birth = #{userBirth}
+		where user_no = #{userNo}
+	</update>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from user_tb
+		where user_no = #{userNo}
+	</delete>
+	
+	<!-- 전체가게출력 -->
+	<resultMap type="Store" id="storeMap">	
+		<result column="sto_no" property="stoNo"/>
+		<result column="sto_name" property="stoName"/>
+		<result column="rst_menu" property="rstMenu"/>
+		<result column="rst_price" property="rstPrice"/>
+		<result column="sto_addr" property="stoAddr"/>
+		<result column="sto_hours" property="stoHours"/>
+		<result column="sto_phone_number" property="stoPhoneNumber"/>
+		<result column="sto_seat" property="stoSeat"/>
+		<result column="sto_hours" property="stoHours"/>
+		<result column="sto_type" property="stoType"/>
+		<result column="acc_reservation" property="accReservation"/>
+	</resultMap>
+	<select id="selectStoreList" resultMap="storeMap">
+		select *
+		from store_tb
+		order by sto_no
+	</select>
+	
+	<select id="selectOneStore" parameterType="int" resultMap="storeMap">
+		select *
+		from store_tb
+		where sto_no = #{stoNo}
+	</select>
+	
+	<update id="storeUpdate" parameterType="Store">
+		update store_tb
+		set sto_name = #{stoName},
+		rst_menu = #{rstMenu},
+		rst_price= #{rstPrice},
+		sto_addr = #{stoAddr},
+		sto_hours= #{stoHours},
+		sto_phone_number = #{stoPhoneNumber},
+		sto_seat = #{stoSeat},
+		sto_hours= #{stoHours},
+		sto_type = #{stoType},
+		acc_reservation = #{accReservation}
+		where sto_no = #{stoNo}
+	</update>
+	
+	<delete id="deleteStore" parameterType="int">
+		delete from store_tb
+		where sto_no = #{stoNo}
+	</delete>
+	
+	
+</mapper>

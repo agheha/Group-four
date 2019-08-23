@@ -1,0 +1,41 @@
+package g4.mini.user.ui;
+
+import java.util.Scanner;
+
+
+public class UserUI {
+	private Scanner sc = new Scanner(System.in);
+	
+	public void service() {
+		while(true) {
+			switch(menu()) {
+			case 1 : new RandomMenuUI().service(); break;
+			case 2 : new UserLoginUI().service(); break;
+			case 3 : new UserJoinUI().service(); break;
+			case 4 : new FindUserInfoUI().service(); break;
+			case 5 : return;
+			case 0:
+				System.out.println("프로그램을 종료합니다. ");
+				System.exit(0);
+				
+			default:
+				System.out.println("잘못된 메뉴번호 입니다.");
+				System.out.println("다시 선택해 주세요.");
+			}
+		}
+	}
+	public int menu() {
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.println("비트캠프 점심메뉴에 오신 것을 환영합니다.");
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.println("1. ★ 오늘의 메뉴 ★");
+		System.out.println("2. 로그인");
+		System.out.println("3. 회원가입");
+		System.out.println("4. 아이디 / 비밀번호 찾기");
+		System.out.println("5. 이전 화면");
+		System.out.println("0. 종료");
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.print("☞ 메뉴를 선택해 주세요 :  ");
+		return Integer.parseInt(sc.nextLine());
+	}
+}

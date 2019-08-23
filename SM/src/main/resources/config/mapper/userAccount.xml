@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="g4.mini.user.account.dao.UserAccountMapper">
+	<resultMap type="User" id="userMap">
+		<result column="user_no" property="userNo" />
+		<result column="user_id" property="userId" />
+		<result column="user_pass" property="userPass" />
+		<result column="user_name" property="userName" />
+		<result column="user_birth" property="userBirth" />
+	</resultMap>
+	<!-- 비밀번호 확인 -->
+	<select id="checkPass" parameterType="string" resultMap="userMap">
+		select *
+		  from user_tb
+		 where user_pass = #{userPass}
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="passUpdate" parameterType="User">
+		UPDATE user_tb
+		SET user_pass = #{userPass}
+		WHERE user_no = #{userNo}
+	</update>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from user_tb
+		where user_no = #{userNo}
+	</delete>
+	
+		<!-- 회원번호받아 user객체 반환 -->
+	<select id="selectOneUser" parameterType="int" resultMap="userMap">
+		select *
+		from user_tb
+		where user_no = #{userNo}
+	</select>
+</mapper>
