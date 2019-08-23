@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g4.mini.store.account.dao.StoreAccountMapper">
+
+		<resultMap type="Store" id="storeMap">
+		<result column="sto_no" property="stoNo"/>
+		<result column="sto_id" property="stoId"/>
+		<result column="sto_pass" property="stoPass"/>
+		<result column="sto_name" property="stoName"/>
+		<result column="rst_Menu" property="rstMenu"/>
+		<result column="rst_price" property="rstPrice"/>
+		<result column="sto_type" property="stoType"/>
+		<result column="bit_distance" property="bitDistance"/>
+		<result column="sto_gpa" property="stoGpa"/>
+		<result column="sto_addr" property="stoAddr"/>
+		<result column="sto_hours" property="stoHours"/>
+		<result column="sto_phone_number" property="stoPhoneNumber"/>
+		<result column="sto_seat" property="stoSeat"/>
+		<result column="sto_now_seat" property="stoNowSeat"/>
+		<result column="acc_reservation" property="accReservation"/>
+	</resultMap>
+	
+<!-- 	<select id="checkPass" parameterType="string" resultMap="Store"> -->
+<!-- 		select * -->
+<!-- 		  from user_tb -->
+<!-- 		 where user_pass = #{userPass} -->
+<!-- 	</select> -->
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updateStore" parameterType="Store">
+		UPDATE store_tb
+		SET sto_pass = #{stoPass}
+		WHERE sto_no = #{stoNo}
+	</update>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteStore" parameterType="int">
+		delete from store_tb
+		where sto_no = #{stoNo}
+	</delete>
+	
+	<!-- 가게 메뉴 추가 -->
+	<insert id="insertStoreMenu" parameterType="StoreMenu" >
+	insert into store_menu_tb(
+	sto_no, menu, price, calorie
+	)
+	values(
+	#{stoNo}, #{stoMenu}, #{price}, #{calorie}
+	) 
+	</insert>
+	
+		
+	<!-- 가게 정보 수정 -->
+	<update id="updateStoreInfo" parameterType="Store">
+		update store_tb
+		   set sto_name = #{stoName},
+		       rst_menu = #{rstMenu},
+		       rst_price = #{rstPrice},
+		       bit_distance = #{bitDistance},
+		       sto_addr = #{stoAddr},
+		       sto_hours = #{stoHours},
+		       sto_phone_number = #{stoPhoneNumber},
+		       sto_seat = #{stoSeat}
+		 where sto_no = #{stoNo}
+	</update>
+	
+	<!-- 가게번호로 상세정보 조회 -->
+	<select id="selectOneStore" parameterType="int" resultMap="storeMap">
+		select *
+		  from store_tb
+		 where sto_no = #{stoNo}
+	</select>
+	
+</mapper>
+	
