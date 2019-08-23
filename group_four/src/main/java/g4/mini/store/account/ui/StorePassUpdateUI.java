@@ -8,20 +8,20 @@ import g4.mini.store.account.dao.StoreAccountMapper;
 import g4.mini.ui.BaseUI;
 import g4.mini.vo.Store;
 
-public class StoreUpdateUI extends BaseUI {
+public class StorePassUpdateUI extends BaseUI {
 	
 	private StoreAccountMapper mapper;
 	
-	public StoreUpdateUI() {
+	public StorePassUpdateUI() {
 		SqlSession session = MyAppSqlConfig.getSqlSessionInstance();
 		mapper = session.getMapper(StoreAccountMapper.class);
-	}
-	
+	} 
+
 	public void service() {
 		while(true) {
-			System.out.println("------------------------------");
+			System.out.println("-------------------------------------------------------------------------------------");
 			System.out.println("비밀번호 변경");
-			System.out.println("------------------------------");
+			System.out.println("-------------------------------------------------------------------------------------");
 			System.out.println("변경할 비밀번호를 입력하세요. ");
 			String pass = getString("비밀번호 : ");
 			String pass2 = getString("비밀번호확인 : ");
@@ -31,14 +31,17 @@ public class StoreUpdateUI extends BaseUI {
 				continue;
 			}
 			
+			// 현재 로그인되어있는 store 가져온다
 			Store sto = StoreLoginStatus.login;
+			
+			// 비밀번호 바꿔 넣어주고
 			sto.setStoPass(pass);
 			
-			// 로그인되어있는 유저의 userNo와 변경할 비밀번호 넘김
-			mapper.updateStore(sto);
-		//	dao.passUpdate(user);
+			// 데이터베이스에 객체 넘긴다.
+			mapper.updateStorePass(sto);
 			System.out.println("비밀번호 변경이 완료되었습니다.");
 			break;
 		}
 	}
+	
 }

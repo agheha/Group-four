@@ -22,7 +22,7 @@
 	</resultMap>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="updateStore" parameterType="Store">
+	<update id="updateStorePass" parameterType="Store">
 		UPDATE store_tb
 		SET sto_pass = #{stoPass}
 		WHERE sto_no = #{stoNo}
@@ -50,6 +50,27 @@
 	#{stoNo}, #{stoMenu}, #{price}, #{calorie}
 	) 
 	</insert>
+	
+	<!-- 가게 정보 수정 -->
+	<update id="updateStoreInfo" parameterType="Store">
+		update store_tb
+		   set sto_name = #{stoName},
+		       rst_menu = #{rstMenu},
+		       rst_price = #{rstPrice},
+		       bit_distance = #{bitDistance},
+		       sto_addr = #{stoAddr},
+		       sto_hours = #{stoHours},
+		       sto_phone_number = #{stoPhoneNumber},
+		       sto_seat = #{stoSeat}
+		 where sto_no = #{stoNo}
+	</update>
+	
+	<!-- 가게번호로 상세정보 조회 -->
+	<select id="selectOneStore" parameterType="int" resultMap="storeMap">
+		select *
+		  from store_tb
+		 where sto_no = #{stoNo}
+	</select>
 	
 </mapper>
 	
